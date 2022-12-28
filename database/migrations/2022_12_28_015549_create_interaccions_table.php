@@ -1,5 +1,6 @@
 <?php
 
+use App\Models\Perro;
 use Illuminate\Database\Migrations\Migration;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Support\Facades\Schema;
@@ -14,11 +15,11 @@ return new class extends Migration
     public function up()
     {
         Schema::create('interaccions', function (Blueprint $table) {
-            $table->id();
-            $table->integer('perrointeresado');
-            $table->integer('perrocandidato');
-            $table->string('preferencia',1);
+            $table->bigIncrements('id');
+            
+            $table->string('preferencia');
             $table->timestamps();
+            // $table->foreign('perro_candidato_id')->references('id')->on('perros');
         });
     }
 

@@ -23,7 +23,7 @@ class PerroController extends Controller
     {
         $perro = new Perro();
         $perro->nombre = $request->nombre;
-        $perro->urlfoto = $request->urlfoto;
+        $perro->url_foto = $request->url_foto;
         $perro->descripcion = $request->descripcion;
 
         $perro->save();
@@ -44,7 +44,7 @@ class PerroController extends Controller
     {
         $perro = Perro::findOrFail($request -> id);
         $perro->nombre = $request->nombre;
-        $perro->urlfoto = $request->urlfoto;
+        $perro->url_foto = $request->url_foto;
         $perro->descripcion = $request->descripcion;
 
         $perro->save();
