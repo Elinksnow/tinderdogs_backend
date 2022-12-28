@@ -1,7 +1,6 @@
 <?php
 
 namespace App\Http\Controllers;
-
 use App\Models\Perro;
 use Illuminate\Http\Request;
 
@@ -11,48 +10,58 @@ class PerroController extends Controller
     public function index()
     {
         $perros = Perro::all();
-        return $perros;
+        return view('perros.index', ['perros' => $perros]);
     }
+
 
     public function create()
     {
-        //
+        return view('perros.create');
     }
+
 
     public function store(Request $request)
     {
         $perro = new Perro();
-        $perro->nombre = $request->nombre;
-        $perro->url_foto = $request->url_foto;
-        $perro->descripcion = $request->descripcion;
-
+        $perro->nombre = $request->input('nombre');
+        $perro->url_foto = $request->input('url_foto');
+        $perro->descripcion = $request->input('descripcion');
         $perro->save();
+
+        return redirect()->route('perros.index')->with('success', 'Perro creado exitosamente.');
     }
+
 
     public function show($id)
     {
-        $perro = Perro::find($id);
-        return $perro;
+        $perro = Perro::findOrFail($id);
+        return view('perros.show', ['perro' => $perro]);
     }
 
-    public function edit(Perro $perro)
+    
+    public function edit($id)
     {
-        //
+        $perro = Perro::findOrFail($id);
+        return view('perros.edit', ['perro' => $perro]);
     }
+
 
     public function update(Request $request, $id)
     {
-        $perro = Perro::findOrFail($request -> id);
-        $perro->nombre = $request->nombre;
-        $perro->url_foto = $request->url_foto;
-        $perro->descripcion = $request->descripcion;
-
+        $perro = Perro::findOrFail($id);
+        $perro->nombre = $request->input('nombre');
+        $perro->url_foto = $request->input('url_foto');
+        $perro->descripcion = $request->input('descripcion');
         $perro->save();
-        return $perro;
+
+        return redirect()->route('perros.index')->with('success', 'Perro actualizado exitosamente.');
     }
 
     public function destroy($id)
     {
-        $perro = Perro::destroy($id);
+        $perro = Perro::findOrFail($id);
+        $perro->delete();
+
+        return redirect()->route('perros.index')->with('sucess','Perro eliminado exitosamente');
     }
 }
