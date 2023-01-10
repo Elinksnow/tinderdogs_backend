@@ -2,7 +2,9 @@
 
 namespace App\Http\Controllers;
 use App\Models\Perro;
+use App\Http\Requests\PerroRequest;
 use Illuminate\Http\Request;
+
 
 class PerroController extends Controller
 {
@@ -19,8 +21,9 @@ class PerroController extends Controller
         return view('perros.create');
     }
 
+    
 
-    public function store(Request $request)
+    public function store(PerroRequest $request)
     {
         $perro = new Perro();
         $perro->nombre = $request->input('nombre');
@@ -46,7 +49,7 @@ class PerroController extends Controller
     }
 
 
-    public function update(Request $request, $id)
+    public function update(PerroRequest $request, $id)
     {
         $perro = Perro::findOrFail($id);
         $perro->nombre = $request->input('nombre');

@@ -7,7 +7,7 @@ use Illuminate\Foundation\Http\FormRequest;
 use Illuminate\Http\Exceptions\HttpResponseException;
 use Illuminate\Http\Response;
 
-class DogRequest extends FormRequest
+class PerroRequest extends FormRequest
 {
     /**
      * Get the validation rules that apply to the request.
