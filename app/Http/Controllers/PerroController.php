@@ -9,8 +9,7 @@ class PerroController extends Controller
     
     public function index()
     {
-        $perros = Perro::all();
-        return view('perros.index', ['perros' => $perros]);
+        return Perro::get();
     }
 
 
@@ -63,5 +62,16 @@ class PerroController extends Controller
         $perro->delete();
 
         return redirect()->route('perros.index')->with('sucess','Perro eliminado exitosamente');
+    }
+
+    public function GetRandomPerro()
+    {
+
+        $databaselength = count( Perro::get() );
+
+        $random = rand(2, $databaselength-1);
+
+        return $post = Perro::find($random);
+       
     }
 }

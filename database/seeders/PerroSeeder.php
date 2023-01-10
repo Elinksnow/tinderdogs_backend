@@ -4,47 +4,43 @@ namespace Database\Seeders;
 
 use Illuminate\Database\Console\Seeds\WithoutModelEvents;
 use Illuminate\Database\Seeder;
+use Illuminate\Support\Facades\DB;
 use App\Models\Perro;
 
 class PerroSeeder extends Seeder
 {
     public function run()
     {
-        $perro = new Perro();
-        $perro->nombre = 'Palmerita';
-        $perro->url_foto = 'https://pbs.twimg.com/media/EMzvMlMXYAAJeqX?format=jpg&name=large';
-        $perro->descripcion = 'Perro pequeño naranjo y juguetón';
-        $perro->save();
 
-        $perro = new Perro();
-        $perro->nombre = 'Chaucha';
-        $perro->url_foto = 'https://pbs.twimg.com/media/EMzvMlMXYAAJeqX?format=jpg&name=large';
-        $perro->descripcion = 'Perro dalmata grande y leal';
-        $perro->save();
+        $faker = \Faker\Factory::create();
 
-        $perro = new Perro();
-        $perro->nombre = 'Tepo Tepo';
-        $perro->url_foto = 'https://pbs.twimg.com/media/EMzvMlLXkAAkezb?format=jpg&name=large';
-        $perro->descripcion = 'Perro miedoso pequeno y gris';
-        $perro->save();
+        $this->CrearPerros($faker, 100);
+        //$this->insertarInteraccions($faker, 100);
 
-        $perro = new Perro();
-        $perro->nombre = 'Yo no fui';
-        $perro->url_foto = 'https://pbs.twimg.com/media/EMzvMlLXkAAkezb?format=jpg&name=large';
-        $perro->descripcion = 'Perro travieso con collar rojo';
-        $perro->save();
+        // $perro = new Perro();
+        // $perro->nombre = 'Palmerita';
+        // $perro->url_foto = 'https://pbs.twimg.com/media/EMzvMlMXYAAJeqX?format=jpg&name=large';
+        // $perro->descripcion = 'Perro pequeño naranjo y juguetón';
+        // $perro->save();
 
-        $perro = new Perro();
-        $perro->nombre = 'Neumatex';
-        $perro->url_foto = 'https://pbs.twimg.com/media/EMzvMlMXYAAJeqX?format=jpg&name=large';
-        $perro->descripcion = 'Perro plomo y pensativo';
-        $perro->save();
+    }
 
-        $perro = new Perro();
-        $perro->nombre = 'Coliforme';
-        $perro->url_foto = 'https://pbs.twimg.com/media/EMzvMlMXYAAJeqX?format=jpg&name=large';
-        $perro->descripcion = 'Perro tranquilo cafe con manchas blancas';
-        $perro->save();
+    private function CrearPerros($faker, $cantidad)
+    {
+
+        foreach (range(1,$cantidad) as $index) {
+            $api = 'https://dog.ceo/api/breeds/image/random';
+            $response = json_decode(file_get_contents($api));
+            $fotos = $response->message;
+
+            DB::table('perros')->insert([
+                'nombre' => $faker->firstname(),
+                'url_foto' => $fotos,
+                'descripcion' => $faker->sentence(),
+            ]);
+        }
+
+        return true;
     }
 
 }
