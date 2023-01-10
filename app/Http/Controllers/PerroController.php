@@ -70,14 +70,14 @@ class PerroController extends Controller
 
     public function aceptados()
     {
-        // Aquí debes escribir el código necesario para obtener los perros aceptados
-        // de la base de datos y devolverlos en formato JSON.
+        $perros = Perro::where('estado', 'aceptado')->get();
+        return response()->json($perros);
     }
 
     public function rechazados()
     {
-        // Aquí debes escribir el código necesario para obtener los perros rechazados
-        // de la base de datos y devolverlos en formato JSON.
+        $perros = Perro::where('estado', 'rechazado')->get();
+        return response()->json($perros);
     }
 
 
