@@ -2,7 +2,9 @@
 
 namespace App\Http\Controllers;
 use App\Models\Perro;
+use App\Http\Requests\PerroRequest;
 use Illuminate\Http\Request;
+
 
 class PerroController extends Controller
 {
@@ -18,8 +20,9 @@ class PerroController extends Controller
         return view('perros.create');
     }
 
+    
 
-    public function store(Request $request)
+    public function store(PerroRequest $request)
     {
         $perro = new Perro();
         $perro->nombre = $request->input('nombre');
@@ -45,7 +48,7 @@ class PerroController extends Controller
     }
 
 
-    public function update(Request $request, $id)
+    public function update(PerroRequest $request, $id)
     {
         $perro = Perro::findOrFail($id);
         $perro->nombre = $request->input('nombre');
@@ -74,4 +77,18 @@ class PerroController extends Controller
         return $post = Perro::find($random);
        
     }
+
+    public function aceptados()
+    {
+        $perros = Perro::where('estado', 'aceptado')->get();
+        return response()->json($perros);
+    }
+
+    public function rechazados()
+    {
+        $perros = Perro::where('estado', 'rechazado')->get();
+        return response()->json($perros);
+    }
+
+
 }
