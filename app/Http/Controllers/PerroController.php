@@ -67,4 +67,18 @@ class PerroController extends Controller
 
         return redirect()->route('perros.index')->with('sucess','Perro eliminado exitosamente');
     }
+
+    public function aceptados()
+    {
+        // Aquí debes escribir el código necesario para obtener los perros aceptados
+        // de la base de datos y devolverlos en formato JSON.
+    }
+
+    public function rechazados()
+    {
+        // Aquí debes escribir el código necesario para obtener los perros rechazados
+        // de la base de datos y devolverlos en formato JSON.
+    }
+
+
 }

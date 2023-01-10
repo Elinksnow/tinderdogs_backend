@@ -15,3 +15,5 @@ Route::get('/perros/{id}/edit', 'PerroController@edit');
 Route::put('/perros/{id}', 'PerroController@update');
 Route::patch('/perros/{id}', 'PerroController@update');
 Route::delete('/perros/{id}', 'PerroController@destroy');
+Route::get('/perros/aceptados', 'PerroController@aceptados');
+Route::get('/perros/rechazados', 'PerroController@rechazados');
