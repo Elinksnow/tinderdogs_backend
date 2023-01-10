@@ -15,7 +15,6 @@ class PerroSeeder extends Seeder
         $faker = \Faker\Factory::create();
 
         $this->CrearPerros($faker, 100);
-        //$this->insertarInteraccions($faker, 100);
 
         // $perro = new Perro();
         // $perro->nombre = 'Palmerita';

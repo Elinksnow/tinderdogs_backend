@@ -36,8 +36,7 @@ class PerroController extends Controller
 
     public function show($id)
     {
-        $perro = Perro::findOrFail($id);
-        return view('perros.show', ['perro' => $perro]);
+        return Perro::findorFail($id);
     }
 
     
